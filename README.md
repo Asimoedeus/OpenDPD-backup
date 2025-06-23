@@ -188,6 +188,17 @@ For convenience, you can reproduce all MP-DPD results using:
 bash quant_mp_dpd.sh
 ```
 
+# Parameters of 'spec.json'
+```
+{
+    "input_signal_fs": 800e6, // 采样率 sample rate(Hz)
+    "bw_main_ch": 200e6, // bandwidth of main channel, which = bw\ main\ ch = B_{\text{min}} + B_{\text{excess}} = \frac{R_s}{2} (1 + \alpha) where 符号率R_s = \frac{f_s(sample\ rate)}{\text{sps(每符号样本数)}} = \frac{32000}{4} = 8000\\ and 滚降系数 \alpha（excess\ bw） = 0.35
+    "bw_sub_ch": 20e6, //  每个子信道（子载波聚合时每个小带宽）的带宽 bandwidth of every sub channel, which can be ignored or just keep using this number if you are using single carrier wave
+    "n_sub_ch": 10, // 子载波数量 number of sub channel, which = 1 if you are using single carrier wave. （bw_main_ch = bw_sub_ch * n_sub_ch）
+    "nperseg": 2560 // 用于谱分析/ACLR 计算的 FFT 段长度
+}
+```
+
 # Authors & Citation
 If you find this repository helpful, please cite our work:
 - [ISCAS 2024] [OpenDPD: An Open-Source End-to-End Learning & Benchmarking Framework for Wideband Power Amplifier Modeling and Digital Pre-Distortion](https://ieeexplore.ieee.org/abstract/document/10558162)
@@ -229,10 +240,3 @@ If you find this repository helpful, please cite our work:
    year={2025},
    pages={1–4} }
 ```
-# Contributors
-
-- **Chang Gao** - Project Lead
-- **Yizhuo Wu** - Core Developer
-- **Ang Li** - Core Developer
-- **Huanqiang Duan** - Contributor
-- **Ruishen Yang** - Contributor
